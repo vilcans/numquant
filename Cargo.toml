@@ -1,0 +1,11 @@
+[package]
+name = "numquant"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+num-traits = "0.2.14"
+serde = { version = "1.0", optional = true, features = ["derive"] }
+
+[dev-dependencies]
+approx = "0.5.1"
