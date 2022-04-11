@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 description = "Quantize numbers to a smaller range to save bandwidth or memory data types and back again."
 repository = "https://github.com/vilcans/numquant"
+documentation = "https://docs.rs/numquant"
 keywords = ["numeric", "quantization"]
 categories = ["network-programming"]
 license = "MIT OR Apache-2.0"
