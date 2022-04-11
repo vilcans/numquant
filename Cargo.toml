@@ -6,6 +6,7 @@ description = "Quantize numbers to a smaller range to save bandwidth or memory d
 repository = "https://github.com/vilcans/numquant"
 keywords = ["numeric", "quantization"]
 categories = ["network-programming"]
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 num-traits = "0.2.14"
