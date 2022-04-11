@@ -1,10 +1,10 @@
 # numquant
 
-Converts a floating point number to a value of another (smaller) type.
+Quantize numbers to a smaller range to save bandwidth or memory.
 
-A typical use case is to reduce bandwidth or storage space.
+The input floating point value is expected within a given range. Values outside this range will be clamped. The input value will then be quantized into a given integer range.
 
-The input floating point value must be within a given range. Values outside this range will be clamped.
+For example, given the allowed range -1000.0 to 1000.0, and the quantized range 0 to 255 (to fit in a byte), the value -1000.0 would be quantized to 0, and 1000.0 would be quantized to 255, and values in-between are linearly interpolated between 0 and 255.
 
 ## Example
 

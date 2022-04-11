@@ -2,6 +2,7 @@
 name = "numquant"
 version = "0.1.0"
 edition = "2021"
+description = "Quantize numbers to a smaller range to save bandwidth or memory data types and back again."
 
 [dependencies]
 num-traits = "0.2.14"
