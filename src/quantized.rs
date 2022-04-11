@@ -1,7 +1,5 @@
 use std::marker::PhantomData;
 
-use num_traits::AsPrimitive;
-
 use crate::Quantize;
 
 /// Contains a quantized value.
@@ -17,7 +15,7 @@ pub struct Quantized<Q: Quantize>(Q::Type, PhantomData<Q>);
 
 impl<Q: Quantize> Quantized<Q>
 where
-    Q::Type: AsPrimitive<f64>,
+    Q::Type: Into<f64>,
 {
     pub fn set(&mut self, value: f64) {
         self.0 = Q::quantize(value);
@@ -26,7 +24,7 @@ where
 
 impl<Q: Quantize> Quantized<Q>
 where
-    Q::Type: AsPrimitive<f64>,
+    Q::Type: Into<f64> + Copy,
 {
     pub fn from_raw(v: Q::Type) -> Self {
         Self(v, Default::default())

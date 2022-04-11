@@ -1,7 +1,5 @@
 use std::{marker::PhantomData, ops::Range};
 
-use num_traits::AsPrimitive;
-
 use crate::linear::Linear;
 
 /// Quantizes/dequantizes to a value between 0 and `Q_MAX` stored in type `T`.
@@ -11,7 +9,7 @@ pub struct IntRange<T, const Q_MAX: u32, const MIN: i64, const MAX: i64>(Phantom
 impl<T, const Q_MAX: u32, const MIN: i64, const MAX: i64> Linear for IntRange<T, Q_MAX, MIN, MAX>
 where
     T: 'static + Copy,
-    u32: AsPrimitive<T>,
+    u32: TryInto<T>,
 {
     type Type = T;
 
@@ -20,7 +18,10 @@ where
     }
 
     fn q_max() -> Self::Type {
-        Q_MAX.as_()
+        match Q_MAX.try_into() {
+            Ok(v) => v,
+            Err(_) => panic!("Q_MAX not convertible to T"),
+        }
     }
 }
 

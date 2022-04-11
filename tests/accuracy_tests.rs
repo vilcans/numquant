@@ -1,4 +1,3 @@
-use num_traits::AsPrimitive;
 use numquant::linear;
 use std::ops::Range;
 
@@ -14,12 +13,11 @@ fn test_accuracy() {
 /// Also ensures that the quantized values are evenly distributed across the values from 0 to `q_max`.
 fn test_with_values<T>(range: Range<f64>, q_max: T, iterations: usize)
 where
-    T: Copy + AsPrimitive<f64> + std::fmt::Display,
-    f64: AsPrimitive<T>,
+    T: Copy + Into<f64> + TryFrom<u64> + std::fmt::Display,
     usize: TryFrom<T>,
     <usize as TryFrom<T>>::Error: std::fmt::Debug,
 {
-    let epsilon: f64 = linear::max_error(range.clone(), q_max.as_());
+    let epsilon: f64 = linear::max_error(range.clone(), q_max.into());
 
     println!("Testing range={range:?} q_max={q_max}: epsilon={epsilon}");
 

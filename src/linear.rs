@@ -1,7 +1,6 @@
 //! For quantizing values linearly to a range.
 
 use crate::Quantize;
-use num_traits::AsPrimitive;
 use std::ops::Range;
 
 /// For quantizing values linearly to a range.
@@ -24,55 +23,45 @@ pub trait Linear {
 
 impl<L: Linear> Quantize for L
 where
-    <L as Linear>::Type: AsPrimitive<f64>,
-    f64: AsPrimitive<<L as Linear>::Type>,
+    <L as Linear>::Type: Into<f64> + TryFrom<u64> + Copy,
 {
     type Type = L::Type;
 
-    fn quantize(value: f64) -> Self::Type
-    where
-        f64: AsPrimitive<Self::Type>,
-        Self::Type: AsPrimitive<f64> + Copy,
-    {
+    fn quantize(value: f64) -> Self::Type {
         quantize(value, Self::range(), Self::q_max())
     }
 
-    fn dequantize(quantized: Self::Type) -> f64
-    where
-        f64: AsPrimitive<Self::Type>,
-        Self::Type: AsPrimitive<f64> + Copy,
-    {
+    fn dequantize(quantized: Self::Type) -> f64 {
         dequantize(quantized, Self::range(), Self::q_max())
     }
 
-    fn max_error() -> f64
-    where
-        Self::Type: AsPrimitive<f64>,
-    {
-        max_error(Self::range(), Self::q_max().as_())
+    fn max_error() -> f64 {
+        max_error(Self::range(), Self::q_max().into())
     }
 }
 
 /// Linearly quantize a value.
 pub fn quantize<T>(value: f64, range: Range<f64>, q_max: T) -> T
 where
-    f64: AsPrimitive<T>,
-    T: AsPrimitive<f64> + Copy,
+    T: Into<f64> + TryFrom<u64> + Copy,
 {
     let normalized = ((value - range.start) / (range.end - range.start)).clamp(0.0, 1.0);
-    let q_max = q_max.as_();
+    let q_max: f64 = q_max.into();
     // Regarding the `min` call, see https://stackoverflow.com/a/600016
-    ((q_max + 1.0) * normalized).min(q_max).as_()
+    let v = ((q_max + 1.0) * normalized).min(q_max) as u64;
+    match v.try_into() {
+        Ok(v) => v,
+        Err(_) => panic!("{v} not convertible to T"),
+    }
 }
 
 /// Linearly dequantize a value.
 pub fn dequantize<T>(quantized: T, range: Range<f64>, q_max: T) -> f64
 where
-    f64: AsPrimitive<T>,
-    T: AsPrimitive<f64> + Copy,
+    T: Into<f64> + Copy,
 {
-    let quantized = quantized.as_();
-    let q_max = q_max.as_();
+    let quantized = quantized.into();
+    let q_max = q_max.into();
     range.start + (range.end - range.start) * quantized / q_max
 }
 
