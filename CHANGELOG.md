@@ -3,6 +3,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.2.0] - 2022-04-11
 ### Changed
 - Remove dependency `num_traits`. It failed silently for some cases. Generic types must instead implement `TryFrom<u64>`.
 
@@ -11,5 +13,6 @@
 - First implementation
 
 <!-- next-url -->
-[Unreleased]: https://github.com/vilcans/numquant/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/vilcans/pixel_pen/compare/numquant-v0.2.0...HEAD
+[0.2.0]: https://github.com/vilcans/numquant/compare/v0.1.0...numquant-v0.2.0
 [0.1.0]: https://github.com/vilcans/numquant/tag/v0.1.0

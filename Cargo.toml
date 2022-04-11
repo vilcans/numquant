@@ -1,6 +1,6 @@
 [package]
 name = "numquant"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "Quantize numbers to a smaller range to save bandwidth or memory data types and back again."
 repository = "https://github.com/vilcans/numquant"
