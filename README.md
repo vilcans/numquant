@@ -20,3 +20,8 @@ let dequantized = quantized.to_f64();
 // The conversion isn't lossless, but the dequantized value is close to the original:
 approx::assert_abs_diff_eq!(original, dequantized, epsilon = U8::<0, 1000>::max_error());
 ```
+
+## Links
+
+  * [Documentation](https://docs.rs/numquant)
+  * [crates.io](https://crates.io/crates/numquant)
