@@ -4,12 +4,11 @@ use crate::linear::Linear;
 
 /// Quantizes/dequantizes to a value between 0 and `Q_MAX` stored in type `T`.
 /// The range for the unquantized value is between `MIN` and `MAX`. Values outside of this are clamped.
-pub struct IntRange<T, const Q_MAX: u32, const MIN: i64, const MAX: i64>(PhantomData<T>);
+pub struct IntRange<T, const Q_MAX: u64, const MIN: i64, const MAX: i64>(PhantomData<T>);
 
-impl<T, const Q_MAX: u32, const MIN: i64, const MAX: i64> Linear for IntRange<T, Q_MAX, MIN, MAX>
+impl<T, const Q_MAX: u64, const MIN: i64, const MAX: i64> Linear for IntRange<T, Q_MAX, MIN, MAX>
 where
-    T: 'static + Copy,
-    u32: TryInto<T>,
+    u64: TryInto<T>,
 {
     type Type = T;
 

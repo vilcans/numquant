@@ -24,14 +24,14 @@ where
 
 impl<Q: Quantize> Quantized<Q>
 where
-    Q::Type: Into<f64> + Copy,
+    Q::Type: Into<f64> + Clone,
 {
     pub fn from_raw(v: Q::Type) -> Self {
         Self(v, Default::default())
     }
 
     pub fn raw(&self) -> Q::Type {
-        self.0
+        self.0.clone()
     }
 
     /// Create an instance from an `f64`.
@@ -44,7 +44,7 @@ where
 
     /// Dequantize the stored value into an `f64`.
     pub fn to_f64(&self) -> f64 {
-        Q::dequantize(self.0)
+        Q::dequantize(self.0.clone())
     }
 
     /// Create an instance from an `f32`.
