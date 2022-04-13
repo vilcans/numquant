@@ -27,7 +27,7 @@ where
     Q::Type: Into<f64> + Clone,
 {
     pub fn from_raw(v: Q::Type) -> Self {
-        Self(v, Default::default())
+        Self(v, PhantomData)
     }
 
     pub fn raw(&self) -> Q::Type {
