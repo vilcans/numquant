@@ -3,11 +3,11 @@
 //! ## Quantize an `f64` to a byte and back again
 //!
 //! ```
-//! use numquant::{Quantize, Value, Linear, quantizer};
+//! use numquant::int_types::Q8;
 //! let original = 500.0;
 //! // Quantize the value into a byte between 0 and 255.
 //! // Quantization supports inputs between 0 and 1000.
-//! type T = Value::<quantizer::U8, Linear<0, 1000>>;
+//! type T = Q8::<0, 1000>;
 //! let quantized = T::from_f64(original);
 //! // Convert it back to an f64
 //! let dequantized = quantized.to_f64();
@@ -15,10 +15,12 @@
 //! approx::assert_abs_diff_eq!(original, dequantized, epsilon = T::max_error());
 //! ```
 
+pub mod int_types;
 mod linear;
 mod normalize;
 mod quantize;
 pub mod quantizer;
+mod range_arg;
 mod value;
 
 pub use linear::Linear;
