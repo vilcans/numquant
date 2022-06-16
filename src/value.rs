@@ -35,6 +35,19 @@ where
         N::denormalize(normalized)
     }
 
+    /// Create an instance from an `f32`.
+    pub fn from_f32(v: f32) -> Self
+    where
+        Self: Sized,
+    {
+        Self::from_f64(v as f64)
+    }
+
+    /// Convert the stored value into an `f32`.
+    pub fn to_f32(&self) -> f32 {
+        self.to_f64() as f32
+    }
+
     pub fn max_error() -> f64
     where
         N: NormalizeError,
