@@ -55,12 +55,12 @@ where
         N::max_error(Q::max_error())
     }
 
-    pub fn from_raw(v: Q::Type) -> Self {
+    pub const fn from_raw(v: Q::Type) -> Self {
         Self(v, PhantomData)
     }
 
-    pub fn raw(&self) -> Q::Type {
-        self.0.clone()
+    pub const fn raw(&self) -> &Q::Type {
+        &self.0
     }
 }
 
