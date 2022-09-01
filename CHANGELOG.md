@@ -19,6 +19,6 @@
 - First implementation
 
 <!-- next-url -->
-[Unreleased]: https://github.com/vilcans/pixel_pen/compare/numquant-v0.2.0...HEAD
+[Unreleased]: https://github.com/vilcans/numquant/compare/numquant-v0.2.0...HEAD
 [0.2.0]: https://github.com/vilcans/numquant/compare/v0.1.0...numquant-v0.2.0
 [0.1.0]: https://github.com/vilcans/numquant/tag/v0.1.0
