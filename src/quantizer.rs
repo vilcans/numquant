@@ -11,6 +11,7 @@ use crate::Quantize;
 /// 1.0 will be quantized to `Q_MAX` of type `T`.
 /// Values in-between are linearly interpolated between 0 and `Q_MAX`.
 /// Values outside of the range 0.0..1.0 will be clamped to be inside the range.
+#[derive(PartialEq, Eq, PartialOrd, Ord)]
 pub struct Quantizer<T, const Q_MAX: u64> {
     _phantom: PhantomData<T>,
 }

@@ -14,6 +14,7 @@ use crate::{
 /// approx::assert_abs_diff_eq!(v, 250.0, epsilon = 1.0);
 /// ```
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[derive(PartialEq, Eq, PartialOrd, Ord)]
 pub struct Value<Q: Quantize, N: Normalize>(Q::Type, PhantomData<(Q, N)>);
 
 impl<Q: Quantize, N: Normalize> Value<Q, N>

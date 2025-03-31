@@ -10,6 +10,9 @@
   - Remove obsolete `'static` bound on `impl Linear for IntRange`.
 - Split normalization and quantization into different traits. This gives more flexibility.
 
+### Added
+- Implement `Eq`, `PartialEq`, `Ord`, and `PartialOrd` traits on `Value` and other structs.
+
 ## [0.2.0] - 2022-04-11
 ### Changed
 - Remove dependency `num_traits`. It failed silently for some cases. Generic types must instead implement `TryFrom<u64>`.

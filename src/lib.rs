@@ -26,3 +26,26 @@ mod value;
 pub use linear::Linear;
 pub use quantize::Quantize;
 pub use value::Value;
+
+#[cfg(test)]
+mod test {
+    use crate::int_types::Q8;
+
+    #[test]
+    fn equal() {
+        let a = Q8::<0, 32>::from_f64(32.0);
+        let b = Q8::<0, 32>::from_f64(31.0);
+        assert_eq!(a, a);
+        assert_ne!(a, b);
+    }
+
+    #[test]
+    fn order() {
+        let a = Q8::<0, 32>::from_f64(32.0);
+        let b = Q8::<0, 32>::from_f64(31.0);
+        assert!(b < a);
+        assert!(a > b);
+        assert!(a <= a);
+        assert!(a >= a);
+    }
+}

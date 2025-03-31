@@ -6,6 +6,7 @@ use crate::{
 };
 
 /// Normalizes/denormalizes a value linearly between MIN and MAX.
+#[derive(PartialEq, Eq, PartialOrd, Ord)]
 pub struct Linear<const MIN: RangeArg, const MAX: RangeArg>;
 
 impl<const MIN: RangeArg, const MAX: RangeArg> Normalize for Linear<MIN, MAX> {
